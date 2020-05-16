@@ -21,7 +21,7 @@ describe "Items API" do
     expect(response).to be_successful
 
     item = JSON.parse(response.body, symbolize_headers: true)
-    require "pry"; binding.pry
+
     expect(item["id"]).to eql(id)
   end
 

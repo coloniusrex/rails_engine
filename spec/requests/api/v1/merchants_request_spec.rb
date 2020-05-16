@@ -9,6 +9,9 @@ describe "Merchants API" do
     expect(response).to be_successful
 
     merchants = JSON.parse(response.body, symbolize_headers: true)
+    require "pry"; binding.pry
+    expect(merchants[:type]).to eq("merchant")
+    expect(merchants[:attributes]).to have_key(:name)
     expect(merchants.count).to eql(3)
   end
 

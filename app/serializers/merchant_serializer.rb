@@ -1,3 +1,6 @@
 class MerchantSerializer < ActiveModel::Serializer
-  attributes :id
+  type 'merchant'
+  
+  attributes :id, :name
+
 end

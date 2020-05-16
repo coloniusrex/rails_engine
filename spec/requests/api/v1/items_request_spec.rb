@@ -9,7 +9,8 @@ describe "Items API" do
     expect(response).to be_successful
 
     items = JSON.parse(response.body, symbolize_headers: true)
-    expect(items.count).to eql(3)
+
+    expect(items[:data].count).to eql(3)
   end
 
   it "can get one item by it's ID" do
@@ -20,6 +21,7 @@ describe "Items API" do
     expect(response).to be_successful
 
     item = JSON.parse(response.body, symbolize_headers: true)
+    require "pry"; binding.pry
     expect(item["id"]).to eql(id)
   end
 

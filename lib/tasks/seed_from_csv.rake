@@ -26,6 +26,7 @@
     file = 'db/csv_seed/items.csv'
     CSV.foreach(file, headers: true) do |row|
       item_hash = row.to_hash
+
       item_hash["unit_price"].insert(-3, ".")
       item = Item.where(id: item_hash["id"])
       if item.count == 1

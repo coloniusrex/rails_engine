@@ -4,5 +4,6 @@ FactoryBot.define do
     description { Faker::Movies::HitchhikersGuideToTheGalaxy.marvin_quote }
     unit_price { Faker::Number.number(digits: 5) }
     merchant_id { create(:merchant).id }
+     association :merchant, factory: :merchant
   end
 end

@@ -9,8 +9,7 @@ describe "Items API" do
     expect(response).to be_successful
 
     items = JSON.parse(response.body, symbolize_headers: true)
-
-    expect(items[:data].count).to eql(3)
+    expect(items["data"].count).to eql(3)
   end
 
   it "can get one item by it's ID" do
@@ -21,8 +20,7 @@ describe "Items API" do
     expect(response).to be_successful
 
     item = JSON.parse(response.body, symbolize_headers: true)
-
-    expect(item["id"]).to eql(id)
+    expect(item["data"]["id"]).to eql("#{id}")
   end
 
   it "can create a new item" do
@@ -41,7 +39,7 @@ describe "Items API" do
   it "can update an existing item" do
     item_1 = create(:item)
     old_name = item_1.name
-    item_params = { name: "Rocket", description: "Shoots very high! Engines not included.", unit_price: 3}
+    item_params = { name: "Rocket", description: "Shoots very high! Engines not included.", unit_price: 300}
 
     put "/api/v1/items/#{item_1.id}", params: {item: item_params}
 

@@ -9,10 +9,10 @@ describe "Merchants API" do
     expect(response).to be_successful
 
     merchants = JSON.parse(response.body, symbolize_headers: true)
-    require "pry"; binding.pry
-    expect(merchants[:type]).to eq("merchant")
-    expect(merchants[:attributes]).to have_key(:name)
-    expect(merchants.count).to eql(3)
+
+    expect(merchants["data"].first["type"]).to eql("merchant")
+    expect(merchants["data"].first["attributes"]).to have_key("name")
+    expect(merchants["data"].count).to eql(3)
   end
 
   it "can get one merchant by it's ID" do
@@ -23,7 +23,7 @@ describe "Merchants API" do
     expect(response).to be_successful
 
     merchant = JSON.parse(response.body, symbolize_headers: true)
-    expect(merchant["id"]).to eql(id)
+    expect(merchant["data"]["id"]).to eql("#{id}")
   end
 
   it "can create a new merchant" do

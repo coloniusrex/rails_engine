@@ -24,6 +24,8 @@ describe "Merchants API" do
 
     merchant = JSON.parse(response.body, symbolize_headers: true)
     expect(merchant["data"]["id"]).to eql("#{id}")
+    expect(merchant["data"]["type"]).to eql("merchant")
+    expect(merchant["data"]["attributes"]).to have_key("name")
   end
 
   it "can create a new merchant" do
@@ -34,7 +36,10 @@ describe "Merchants API" do
     expect(response).to be_successful
 
     merchant = JSON.parse(response.body, symbolize_headers: true)
-    expect(Merchant.last.name).to eql(merchant_params[:name])
+
+    expect(merchant["data"]["id"]).to eql("#{Merchant.last.id}")
+    expect(merchant["data"]["type"]).to eql("merchant")
+    expect(merchant["data"]["attributes"]["name"]).to eql(merchant_params[:name])
   end
 
   it "can update an existing merchant" do
@@ -48,6 +53,9 @@ describe "Merchants API" do
 
     merchant = JSON.parse(response.body, symbolize_headers: true)
     expect(Merchant.last.name).to eql(merchant_params[:name])
+    expect(Merchant.last.name).to_not eql(old_name)
+    expect(merchant["data"]["attributes"]["name"]).to eql(merchant_params[:name])
+    expect(merchant["data"]["attributes"]["name"]).to_not eql(old_name)
   end
 
   it "can destroy an existing merchant" do
@@ -58,6 +66,11 @@ describe "Merchants API" do
     delete "/api/v1/merchants/#{merchant_1.id}"
 
     expect(response).to be_successful
+    destroyed = JSON.parse(response.body, symbolize_headers: true)
+
+    expect(destroyed["data"]["id"]).to eql("#{merchant_1.id}")
+    expect(destroyed["data"]["attributes"]["name"]).to eql("#{merchant_1.name}")
+
     expect(Merchant.count).to eql(0)
     expect{Merchant.find(merchant_1.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end

@@ -16,14 +16,18 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def destroy
-    merchant = Merchant.find(params[:id])
-    merchant.destroy
-    render json: merchant
+    render json: destroy_and_display(params[:id])
   end
 
   private
 
   def merchant_params
     params.require(:merchant).permit(:name)
+  end
+
+  def destroy_and_display(id)
+    merchant = Merchant.find(id)
+    merchant.destroy
+    merchant
   end
 end

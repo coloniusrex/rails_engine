@@ -1,8 +1,5 @@
-class CustomerSerializer < ActiveModel::Serializer
-  type 'customer'
+class CustomerSerializer
+  include FastJsonapi::ObjectSerializer
   attributes :id
 
-  def id
-    object.id.to_s
-  end
 end

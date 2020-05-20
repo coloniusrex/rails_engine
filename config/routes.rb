@@ -3,13 +3,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :merchants, except: [:new, :edit]
-      namespace :merchant do
+
+      resources :merchants, except: [:new, :edit] do
         resources :items, except: [:new, :edit]
       end
-      resources :items, except: [:new, :edit]
-      namespace :item do
-        resources :merchant, only: [:show]
+
+      resources :items, except: [:new, :edit] do
+        get '/merchant', to: 'items/merchant#show'
       end
       resources :customers, except: [:new, :edit]
 

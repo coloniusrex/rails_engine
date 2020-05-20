@@ -9,6 +9,7 @@ gem 'puma', '~> 3.11'
 gem 'pry'
 gem 'rack-cors'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'fast_jsonapi'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'simplecov', require: false, group: :test
 

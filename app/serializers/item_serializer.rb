@@ -3,9 +3,7 @@ class ItemSerializer
   belongs_to :merchant
   attributes :id, :name, :description, :unit_price, :merchant_id
 
-
-  def id
-    object.id.to_s
+  attribute :unit_price do |object|
+    object.unit_price.to_f
   end
-
 end

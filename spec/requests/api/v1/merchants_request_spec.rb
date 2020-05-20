@@ -31,7 +31,7 @@ describe "Merchants API" do
   it "can create a new merchant" do
     merchant_params = { name: "SuperSuds" }
 
-    post "/api/v1/merchants", params: {merchant: merchant_params}
+    post "/api/v1/merchants", params: merchant_params
 
     expect(response).to be_successful
 
@@ -47,7 +47,7 @@ describe "Merchants API" do
     old_name = merchant_1.name
     merchant_params = { name: "SuperSuds" }
 
-    put "/api/v1/merchants/#{merchant_1.id}", params: {merchant: merchant_params}
+    put "/api/v1/merchants/#{merchant_1.id}", params: merchant_params
 
     expect(response).to be_successful
 

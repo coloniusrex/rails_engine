@@ -25,15 +25,16 @@ describe "Items API" do
 
   it "can create a new item" do
     merchant = create(:merchant)
-    item_params = { name: "Rocket", description: "Shoots very high!", unit_price: 12343, merchant_id: merchant.id}
+    body = { name: "Rocket", description: "Shoots very high!", unit_price: 12343, merchant_id: merchant.id}
 
-    post "/api/v1/items", params: {item: item_params}
+    post "/api/v1/items", params: body
 
     expect(response).to be_successful
 
     item = JSON.parse(response.body, symbolize_headers: true)
+
     last_item = Item.last
-    expect(last_item.name).to eql(item_params[:name])
+    expect(last_item.name).to eql(body[:name])
   end
 
   it "can update an existing item" do
@@ -41,7 +42,7 @@ describe "Items API" do
     old_name = item_1.name
     item_params = { name: "Rocket", description: "Shoots very high! Engines not included.", unit_price: 300}
 
-    put "/api/v1/items/#{item_1.id}", params: {item: item_params}
+    put "/api/v1/items/#{item_1.id}", params: item_params
 
     expect(response).to be_successful
 

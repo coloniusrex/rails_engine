@@ -1,6 +1,10 @@
   require 'csv'
   desc "Import customers from CSV file"
   task :import => :environment do
+    Rake::Task["db:drop"].invoke
+    Rake::Task["db:create"].invoke
+    Rake::Task["db:migrate"].invoke
+
     file = 'db/csv_seed/customers.csv'
     CSV.foreach(file, headers: true) do |row|
       customer_hash = row.to_hash
@@ -68,5 +72,9 @@
       else
         Transaction.create!(transaction_hash)
       end
+    end
+
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.reset_pk_sequence!(t)
     end
   end

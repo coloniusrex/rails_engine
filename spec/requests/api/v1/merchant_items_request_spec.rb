@@ -12,6 +12,7 @@ describe "Merchant Items API" do
     expect(response).to be_successful
 
     merchant_items = JSON.parse(response.body, symbolize_headers: true)
+    require "pry"; binding.pry
     expect(merchant_items["data"].first["id"]).to eql("#{item1.id}")
     expect(merchant_items["data"].first["type"]).to eql("item")
     expect(merchant_items["data"].first["attributes"]["name"]).to eql("#{item1.name}")

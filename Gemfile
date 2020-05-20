@@ -12,6 +12,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'fast_jsonapi'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'simplecov', require: false, group: :test
+gem 'money'
 
  group :test do
     gem 'shoulda-matchers'

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'business intelligence' do
+xdescribe 'business intelligence' do
   it 'can get merchants with most revenue' do
     get "/api/v1/merchants/most_revenue?quantity=7"
     json = JSON.parse(response.body, symbolize_names: true)

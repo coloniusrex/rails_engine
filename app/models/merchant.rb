@@ -14,4 +14,8 @@ class Merchant < ApplicationRecord
      .order("revenue #{sort}")
      .limit(limit)
   end
+
+  def self.most_items(limit = 5, sort = "DESC")
+    
+  end
 end

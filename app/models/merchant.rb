@@ -7,8 +7,8 @@ class Merchant < ApplicationRecord
   validates :name, presence: true
 
   def self.most_revenue(limit = 5, sort = "DESC")
-     Merchant.select("invoices.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
-     .joins(:invoice_items, :invoices)
+     Merchant.select("merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+     .joins(:invoice_items, :invoices, :transactions)
      .merge(Transaction.unscoped.successful)
      .group(:id)
      .order("revenue #{sort}")
@@ -16,6 +16,6 @@ class Merchant < ApplicationRecord
   end
 
   def self.most_items(limit = 5, sort = "DESC")
-    
+
   end
 end

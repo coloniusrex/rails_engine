@@ -5,7 +5,6 @@ class Api::V1::Items::SearchController < ApplicationController
   end
 
   def show
-
     render json: ItemSerializer.new(item_search.first)
   end
 

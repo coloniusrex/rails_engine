@@ -17,14 +17,20 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
-    render json: ItemSerializer.new(item)
+
+
+    render json: ItemSerializer.new(destroy_and_display(params[:id]))
   end
 
   private
 
   def item_params
     params.permit(:name, :description, :unit_price, :merchant_id)
+  end
+
+  def destroy_and_display(id)
+    item = Item.find(id)
+    item.destroy
+    item
   end
 end
